@@ -1,0 +1,13 @@
+C:\Users\user\source\repos\FindRoad\FindRoad\bin\Debug\netcoreapp3.1\FindRoad.exe
+C:\Users\user\source\repos\FindRoad\FindRoad\bin\Debug\netcoreapp3.1\FindRoad.deps.json
+C:\Users\user\source\repos\FindRoad\FindRoad\bin\Debug\netcoreapp3.1\FindRoad.runtimeconfig.json
+C:\Users\user\source\repos\FindRoad\FindRoad\bin\Debug\netcoreapp3.1\FindRoad.runtimeconfig.dev.json
+C:\Users\user\source\repos\FindRoad\FindRoad\bin\Debug\netcoreapp3.1\FindRoad.dll
+C:\Users\user\source\repos\FindRoad\FindRoad\bin\Debug\netcoreapp3.1\FindRoad.pdb
+C:\Users\user\source\repos\FindRoad\FindRoad\obj\Debug\netcoreapp3.1\FindRoad.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\source\repos\FindRoad\FindRoad\obj\Debug\netcoreapp3.1\FindRoad.AssemblyInfoInputs.cache
+C:\Users\user\source\repos\FindRoad\FindRoad\obj\Debug\netcoreapp3.1\FindRoad.AssemblyInfo.cs
+C:\Users\user\source\repos\FindRoad\FindRoad\obj\Debug\netcoreapp3.1\FindRoad.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\FindRoad\FindRoad\obj\Debug\netcoreapp3.1\FindRoad.dll
+C:\Users\user\source\repos\FindRoad\FindRoad\obj\Debug\netcoreapp3.1\FindRoad.pdb
+C:\Users\user\source\repos\FindRoad\FindRoad\obj\Debug\netcoreapp3.1\FindRoad.genruntimeconfig.cache
