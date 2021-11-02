@@ -189,19 +189,6 @@ namespace FindRoad
             close.Reverse();
         }
 
-        class box
-        {
-            public int x;
-            public int y;
-            public int type;
-            public box prev;
-            public box(int x, int y, box prev = null)
-            {
-                this.x = x;
-                this.y = y;
-                this.prev = prev;
-            }
-        }
         public void findRoot_2()
         {
             Queue<Tile> qBox = new Queue<Tile>();
@@ -670,6 +657,48 @@ namespace FindRoad
 
                         nxt.type = 2;
                         nxt.prev = now;
+                    }
+                }
+            }
+
+            while (end != null)
+            {
+                end.type = 3;
+                end = end.prev;
+            }
+        }
+
+        public void Dijkstra_2()
+        {
+            Tile end = grid[Len - 1][Len - 1];
+
+            int[] dirx = new int[4] { 1, 0, -1, 0 };
+            int[] diry = new int[4] { 0, -1, 0, 1 };
+
+            Queue<Tile> open = new Queue<Tile>();
+            open.Enqueue(grid[0][0]);
+
+            while(open.Count > 0)
+            {
+                Tile now = open.Dequeue();
+
+                if (now == end)
+                    break;
+
+                for (int i = 0; i < 4; i++)
+                {
+                    int x = now.x + dirx[i];
+                    int y = now.y + diry[i];
+
+                    if (x < 0 || y < 0 || x >= Len || y >= Len)
+                        continue;
+
+                    Tile nxt = grid[y][x];
+                    if (nxt.type == 0)
+                    {
+                        nxt.type = 2;
+                        nxt.prev = now;
+                        open.Enqueue(nxt);
                     }
                 }
             }
