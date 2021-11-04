@@ -668,7 +668,7 @@ namespace FindRoad
             }
         }
 
-        public void Dijkstra_2()
+        public void Dijkstra_4way_0()
         {
             Tile end = grid[Len - 1][Len - 1];
 
@@ -699,6 +699,69 @@ namespace FindRoad
                         nxt.type = 2;
                         nxt.prev = now;
                         open.Enqueue(nxt);
+                    }
+                }
+            }
+
+            while (end != null)
+            {
+                end.type = 3;
+                end = end.prev;
+            }
+        }
+
+        public void A_Star_4way_0()
+        {
+            Tile end = grid[Len-1][Len-1];
+
+            int[] dirx = new int[4] { 0, 1, 0, -1 };
+            int[] diry = new int[4] { 1, 0, -1, 0 };
+
+            List<Tile> open = new List<Tile>();
+            open.Add(grid[0][0]);
+
+            while (open.Count > 0)
+            {
+                Tile now = open[0];
+                open.RemoveAt(0);
+
+                if (now == end)
+                    break;
+
+                for (int i = 0; i < 4; i++)
+                {
+                    int x = now.x + dirx[i];
+                    int y = now.y + diry[i];
+
+                    if (x < 0 || y < 0 || x >= Len || y >= Len)
+                        continue;
+
+                    int h = now.h + 10;
+                    int g = (int)(MathF.Abs(end.x - x) + MathF.Abs(end.y - y)) * 10;
+
+                    Tile nxt = grid[y][x];
+                    if (nxt.type == 0 || (nxt.type == 2 && nxt.f > h + g))
+                    {
+                        nxt.h = h;
+                        nxt.g = g;
+
+                        if (nxt.type == 0)
+                        {
+                            bool chk = false;
+                            for (int j = 0; j < open.Count; j++)
+                            {
+                                if (chk = (open[j].f > nxt.f))
+                                {
+                                    open.Insert(j, nxt);
+                                    break;
+                                }
+                            }
+                            if (!chk)
+                                open.Add(nxt);
+                        }
+
+                        nxt.type = 2;
+                        nxt.prev = now;
                     }
                 }
             }
