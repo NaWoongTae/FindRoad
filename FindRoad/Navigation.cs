@@ -773,6 +773,112 @@ namespace FindRoad
             }
         }
 
+        // 다익스트라 + 대각 가능 + 8방향
+        public void Dijkstra_0()
+        {
+            int[] dirX = new int[8] { 1, 1, 1, 0, -1, -1, -1, 0 };
+            int[] dirY = new int[8] { -1, 0, 1, 1, 1, 0, -1, -1 };
+
+            Queue<Tile> open = new Queue<Tile>();
+            open.Enqueue(grid[0][0]);
+            Tile end = grid[Len - 1][Len - 1];
+
+            while (open.Count > 0)
+            {
+                Tile now = open.Dequeue();
+
+                for (int i = 0; i < 8; i++)
+                {
+                    int x = now.x + dirX[i];
+                    int y = now.y + dirY[i];
+
+                    if (x < 0 || y < 0 || x >= Len || y >= Len)
+                        continue;
+
+                    Tile nxt = grid[y][x];
+                    if (nxt.type == 0)
+                    {
+                        open.Enqueue(nxt);
+                        nxt.type = 2;
+                        nxt.prev = now;
+                    }
+                }                
+            }
+
+            while (end != null)
+            {
+                end.type = 3;
+                end = end.prev;                
+            }
+        }
+
+        // A* + 8방향
+        public void A_Star_0()
+        {
+            int[] dirX = new int[8] { 1, 1, 1, 0, -1, -1, -1, 0 };
+            int[] dirY = new int[8] { -1, 0, 1, 1, 1, 0, -1, -1 };
+
+            List<Tile> open = new List<Tile>();
+            open.Add(grid[0][0]);
+            Tile end = grid[Len - 1][Len - 1];
+
+            while (open.Count > 0)
+            {
+                Tile now = open[0];
+                open.RemoveAt(0);
+
+                if (now == end)
+                    break;
+
+                for (int i = 0; i < 8; i++)
+                {
+                    int x = now.x + dirX[i];
+                    int y = now.y + dirY[i];
+
+                    if (x < 0 || y < 0 || x >= Len || y >= Len)
+                        continue;
+
+                    if (grid[y][x - dirX[i]].type == 1 && grid[y - dirY[i]][x].type == 1)
+                        continue;
+
+                    int h = now.h + ((i % 2 == 1) ? 10 : 14);
+                    int g = (int)MathF.Min(end.x - x, end.y - y) * 14 + (int)MathF.Abs((end.x - x) - (end.y - y)) * 10;
+
+                    Tile nxt = grid[y][x];
+
+                    if (nxt.type == 0 || (nxt.type == 2 && nxt.f > h + g))
+                    {
+                        nxt.h = h;
+                        nxt.g = g;
+
+                        if (open.Contains(nxt))
+                            open.Remove(nxt);
+
+                        bool isAdd = false;
+                        for (int j = 0; j < open.Count; j++)
+                        {
+                            if (isAdd = (open[j].f > nxt.f))
+                            {
+                                open.Insert(j, nxt);
+                                break;
+                            }
+                        }
+                        if (!isAdd)
+                            open.Add(nxt);
+
+                        nxt.type = 2;
+                        nxt.prev = now;
+                    }
+                }
+            }
+
+            while(end != null)
+            {
+                end.type = 3;
+                end = end.prev;
+            }
+        }
+
         /// <summary> 출력용 메서드 </summary>
         public void OnDraw()
         {
