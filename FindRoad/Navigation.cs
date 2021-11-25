@@ -879,6 +879,42 @@ namespace FindRoad
             }
         }
 
+        public void A_Star_1()
+        {
+            int[] dirX = new int[8] { 1, 1, 1, 0, -1, -1, -1, 0 };
+            int[] dirY = new int[8] { -1, 0, 1, 1, 1, 0, -1, -1 };
+
+            List<Tile> open = new List<Tile>();
+            open.Add(grid[0][0]);
+            Tile end = grid[Len-1][Len-1];
+
+            while (open.Count > 0)
+            {
+                Tile now = open[0];
+                open.RemoveAt(0);
+
+                if (now == end)
+                    break;
+
+                for (int i = 0; i < 8; i++)
+                {
+                    int x = now.x + dirX[i];
+                    int y = now.y + dirY[i];
+
+                    if (x < 0 || y < 0 || x >= Len || y >= Len)
+                        continue;
+
+
+                }
+            }
+
+            while(end!=null)
+            {
+                end.type = 3;
+                end = end.prev;
+            }
+        }
+
         /// <summary> 출력용 메서드 </summary>
         public void OnDraw()
         {
