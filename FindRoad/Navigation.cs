@@ -886,7 +886,7 @@ namespace FindRoad
 
             List<Tile> open = new List<Tile>();
             open.Add(grid[0][0]);
-            Tile end = grid[Len-1][Len-1];
+            Tile end = grid[Len - 1][Len - 1];
 
             while (open.Count > 0)
             {
@@ -904,11 +904,40 @@ namespace FindRoad
                     if (x < 0 || y < 0 || x >= Len || y >= Len)
                         continue;
 
+                    if (grid[y][x - dirX[i]].type == 1 && grid[y - dirY[i]][x].type == 1)
+                        continue;
 
+                    int h = now.h + ((i % 2 == 1) ? 10 : 14);
+                    int g = (int)MathF.Min(end.x - x, end.y - y) * 14 + (int)MathF.Abs((end.x - x) - (end.y - y)) * 10;
+
+                    Tile nxt = grid[y][x];
+
+                    if (nxt.type == 0 || (nxt.type == 2 && nxt.f > h + g))
+                    {
+                        nxt.h = h;
+                        nxt.g = g;
+
+                        open.Remove(nxt);
+
+                        bool isAdd = false;
+                        for (int n = 0; n < open.Count; n++)
+                        {
+                            if (isAdd = (open[n].f > nxt.f))
+                            {
+                                open.Insert(n, nxt);
+                                break;
+                            }
+                        }
+                        if (!isAdd)
+                            open.Add(nxt);
+
+                        nxt.type = 2;
+                        nxt.prev = now;
+                    }
                 }
             }
 
-            while(end!=null)
+            while (end != null)
             {
                 end.type = 3;
                 end = end.prev;
