@@ -12,7 +12,7 @@ namespace FindRoad
                 Nav = new Navigation();
                 Nav.setMaze(25);
                 Nav.setMountain();
-                Nav.A_Star_1();
+                Nav.A_Star_Mountain_0();
 
                 Console.SetCursorPosition(0, 0);
                 Nav.OnDraw();
